@@ -38,104 +38,85 @@
     margin: 0 auto 1rem;
   }
   .card-header {
-    background: var(--accent);
-    color: #fff;
-    padding: 9px 16px;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    background: var(--accent); color: #fff;
+    padding: 9px 16px; font-size: 0.75rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
     font-family: var(--mono);
   }
   .card-body { padding: 14px 16px; }
 
   label {
-    display: block;
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-bottom: 5px;
-    font-family: var(--mono);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    display: block; font-size: 0.72rem; color: var(--muted);
+    margin-bottom: 5px; font-family: var(--mono);
+    text-transform: uppercase; letter-spacing: 0.05em;
   }
   input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    font-size: 1rem;
-    font-family: var(--mono);
-    background: var(--bg);
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.15s;
-    -webkit-appearance: none;
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--border); border-radius: 5px;
+    font-size: 1rem; font-family: var(--mono);
+    background: var(--bg); color: var(--text);
+    outline: none; -webkit-appearance: none;
   }
   input:focus { border-color: var(--accent); }
   .row { display: flex; gap: 8px; align-items: flex-end; margin-top: 10px; }
   .row input[type="number"] { width: 80px; flex-shrink: 0; text-align: center; }
 
   button {
-    cursor: pointer;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    background: var(--surface);
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    padding: 10px 14px;
-    transition: background 0.12s;
-    white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
+    cursor: pointer; border: 1px solid var(--border);
+    border-radius: 5px; background: var(--surface); color: var(--text);
+    font-family: var(--mono); font-size: 0.85rem; padding: 10px 14px;
+    white-space: nowrap; -webkit-tap-highlight-color: transparent;
   }
   button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
   button.scan-btn { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
   button.danger-btn { color: var(--danger); border-color: #e0b0b0; background: var(--danger-light); }
 
+  /* Kamera */
   #cameraWrapper {
-    display: none;
-    position: relative;
-    background: #000;
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
+    display: none; position: relative;
+    background: #000; border-bottom: 1px solid var(--border); overflow: hidden;
   }
-  #interactive { width: 100%; position: relative; }
-  #interactive video { width: 100%; display: block; max-height: 260px; object-fit: cover; }
-  #interactive canvas.drawingBuffer { display: none; }
-
+  #camVideo {
+    width: 100%; display: block;
+    height: 260px; object-fit: cover;
+  }
+  #camCanvas { display: none; }
   .scan-frame {
-    position: absolute;
-    top: 50%; left: 50%;
+    position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 75%; height: 100px;
-    border: 2px solid rgba(255,255,255,0.6);
-    border-radius: 6px;
-    pointer-events: none;
+    width: 78%; height: 110px;
+    border: 2px solid rgba(255,255,255,0.7);
+    border-radius: 6px; pointer-events: none;
   }
-  .scan-line-anim {
-    position: absolute;
-    left: 0; right: 0; height: 2px;
-    background: rgba(80, 200, 120, 0.9);
-    animation: scanAnim 1.8s ease-in-out infinite;
+  .scan-line {
+    position: absolute; left: 0; right: 0; height: 2px;
+    background: rgba(80,220,120,0.95);
+    animation: scanAnim 1.6s ease-in-out infinite;
   }
-  @keyframes scanAnim { 0%{top:10%} 50%{top:85%} 100%{top:10%} }
+  @keyframes scanAnim { 0%{top:5%} 50%{top:88%} 100%{top:5%} }
   .scan-tip {
-    position: absolute;
-    bottom: 10px; left: 0; right: 0;
-    text-align: center;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.72rem; font-family: var(--mono);
-    pointer-events: none;
+    position: absolute; bottom: 44px; left: 0; right: 0;
+    text-align: center; color: rgba(255,255,255,0.85);
+    font-size: 0.72rem; font-family: var(--mono); pointer-events: none;
   }
   #stopScanBtn {
     width: 100%; border-radius: 0; border: none;
-    border-top: 1px solid #333;
-    background: #1a1a1a; color: #fff;
-    padding: 11px; font-size: 0.82rem;
+    border-top: 1px solid #333; background: #1a1a1a;
+    color: #fff; padding: 12px; font-size: 0.82rem;
+    font-family: var(--mono); cursor: pointer;
+  }
+
+  #scanInfo {
+    padding: 8px 16px; font-size: 0.72rem;
+    font-family: var(--mono); color: var(--accent);
+    background: var(--accent-light);
+    border-bottom: 1px solid var(--border);
+    text-align: center; display: none;
   }
 
   #flashOverlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(255,255,255,0.7); z-index: 999; pointer-events: none;
+    background: rgba(255,255,255,0.75); z-index: 999; pointer-events: none;
   }
 
   #listArea { max-height: 260px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -143,11 +124,9 @@
   table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
   thead tr { background: var(--bg); }
   th {
-    padding: 8px 10px; text-align: left;
-    font-family: var(--mono); font-size: 0.68rem;
-    text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--muted); font-weight: normal;
-    border-bottom: 1px solid var(--border);
+    padding: 8px 10px; text-align: left; font-family: var(--mono);
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted); font-weight: normal; border-bottom: 1px solid var(--border);
   }
   td { padding: 8px 10px; border-bottom: 1px solid #eeece6; vertical-align: middle; }
   td.bc { font-family: var(--mono); font-size: 0.75rem; word-break: break-all; }
@@ -156,7 +135,7 @@
     border: 1px solid var(--border); border-radius: 4px;
     background: var(--bg); text-align: center;
   }
-  .del-btn { background: none; border: none; color: #bbb; font-size: 1.3rem; padding: 0 4px; cursor: pointer; line-height: 1; }
+  .del-btn { background: none; border: none; color: #bbb; font-size: 1.3rem; padding: 0 4px; cursor: pointer; }
 
   .footer-row {
     display: flex; justify-content: space-between; align-items: center;
@@ -168,14 +147,13 @@
   .actions button { flex: 1; padding: 13px; font-size: 0.9rem; }
 
   #statusMsg {
-    max-width: 480px; margin: 10px auto 0;
-    font-size: 0.75rem; font-family: var(--mono);
-    color: var(--muted); text-align: center; min-height: 18px; padding: 0 8px;
+    max-width: 480px; margin: 10px auto 0; font-size: 0.75rem;
+    font-family: var(--mono); color: var(--muted);
+    text-align: center; min-height: 18px; padding: 0 8px;
   }
 </style>
 </head>
 <body>
-
 <div id="flashOverlay"></div>
 
 <header>
@@ -185,24 +163,21 @@
 
 <div class="card">
   <div class="card-header">Barkod Girişi</div>
-
+  <div id="scanInfo">▶ Taranıyor...</div>
   <div id="cameraWrapper">
-    <div id="interactive">
-      <div class="scan-frame">
-        <div class="scan-line-anim"></div>
-      </div>
-      <div class="scan-tip">Barkodu çerçeve içine getirin</div>
-    </div>
+    <video id="camVideo" autoplay playsinline muted></video>
+    <canvas id="camCanvas"></canvas>
+    <div class="scan-frame"><div class="scan-line"></div></div>
+    <div class="scan-tip">Barkodu çerçeve içine getirin</div>
     <button id="stopScanBtn">▪ Taramayı Durdur</button>
   </div>
-
   <div class="card-body">
     <label>Barkod Numarası</label>
-    <input type="text" id="manualInput" inputmode="numeric" placeholder="Yazın veya kamera ile okutun..." autocomplete="off" />
+    <input type="text" id="manualInput" inputmode="numeric" placeholder="Yazın veya kamera ile okutun..." autocomplete="off"/>
     <div class="row">
       <div style="flex:1;">
         <label>Adet</label>
-        <input type="number" id="qtyInput" min="1" value="1" />
+        <input type="number" id="qtyInput" min="1" value="1"/>
       </div>
       <button id="addBtn" class="primary">+ Ekle</button>
       <button id="scanBtn" class="scan-btn">📷 Tara</button>
@@ -215,9 +190,7 @@
   <div id="listArea">
     <div id="emptyMsg">— henüz barkod eklenmedi —</div>
     <table id="itemTable" style="display:none;">
-      <thead>
-        <tr><th>#</th><th>Barkod</th><th style="text-align:center;">Adet</th><th></th></tr>
-      </thead>
+      <thead><tr><th>#</th><th>Barkod</th><th style="text-align:center;">Adet</th><th></th></tr></thead>
       <tbody id="tableBody"></tbody>
     </table>
   </div>
@@ -232,35 +205,41 @@
 </div>
 <div id="statusMsg"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2@1.8.4/dist/quagga.min.js"></script>
+<!-- ZXing en güncel stabil sürüm -->
+<script src="https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.5/umd/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js"></script>
 <script>
 let items = [];
 let scanning = false;
+let codeReader = null;
+let videoStream = null;
 let lastCode = '';
 let lastTime = 0;
-let resultBuffer = {};
 
-const manualInput  = document.getElementById('manualInput');
-const qtyInput     = document.getElementById('qtyInput');
-const addBtn       = document.getElementById('addBtn');
-const scanBtn      = document.getElementById('scanBtn');
-const stopScanBtn  = document.getElementById('stopScanBtn');
-const exportBtn    = document.getElementById('exportBtn');
-const clearBtn     = document.getElementById('clearBtn');
-const cameraWrapper= document.getElementById('cameraWrapper');
-const tableBody    = document.getElementById('tableBody');
-const itemTable    = document.getElementById('itemTable');
-const emptyMsg     = document.getElementById('emptyMsg');
-const totalCount   = document.getElementById('totalCount');
-const statusMsg    = document.getElementById('statusMsg');
-const flashOverlay = document.getElementById('flashOverlay');
+const manualInput   = document.getElementById('manualInput');
+const qtyInput      = document.getElementById('qtyInput');
+const addBtn        = document.getElementById('addBtn');
+const scanBtn       = document.getElementById('scanBtn');
+const stopScanBtn   = document.getElementById('stopScanBtn');
+const exportBtn     = document.getElementById('exportBtn');
+const clearBtn      = document.getElementById('clearBtn');
+const cameraWrapper = document.getElementById('cameraWrapper');
+const scanInfo      = document.getElementById('scanInfo');
+const camVideo      = document.getElementById('camVideo');
+const camCanvas     = document.getElementById('camCanvas');
+const tableBody     = document.getElementById('tableBody');
+const itemTable     = document.getElementById('itemTable');
+const emptyMsg      = document.getElementById('emptyMsg');
+const totalCount    = document.getElementById('totalCount');
+const statusMsg     = document.getElementById('statusMsg');
+const flashOverlay  = document.getElementById('flashOverlay');
 
 let statusTimer = null;
 function setStatus(msg, color) {
   statusMsg.textContent = msg;
   statusMsg.style.color = color || 'var(--muted)';
   if (statusTimer) clearTimeout(statusTimer);
-  if (msg) statusTimer = setTimeout(() => statusMsg.textContent = '', 4000);
+  if (msg) statusTimer = setTimeout(() => statusMsg.textContent = '', 4500);
 }
 
 function flash() {
@@ -270,37 +249,26 @@ function flash() {
 
 function addItem(barcode, qty, fromScan) {
   barcode = barcode.trim();
-  if (!barcode) { setStatus('Barkod boş olamaz.', 'var(--danger)'); return false; }
-  qty = parseInt(qty) || 1;
-  if (qty < 1) qty = 1;
+  if (!barcode) { setStatus('Barkod boş olamaz.', 'var(--danger)'); return; }
+  qty = Math.max(1, parseInt(qty) || 1);
   const existing = items.find(i => i.barcode === barcode);
   if (existing) {
     existing.qty += qty;
-    renderTable();
     setStatus('Güncellendi: ' + barcode + ' → ' + existing.qty + ' adet', 'var(--accent)');
   } else {
     items.push({ barcode, qty });
-    renderTable();
     setStatus('✓ Eklendi: ' + barcode, 'var(--accent)');
   }
-  if (!fromScan) {
-    manualInput.value = '';
-    qtyInput.value = '1';
-    manualInput.focus();
-  }
-  return true;
+  renderTable();
+  if (!fromScan) { manualInput.value = ''; qtyInput.value = '1'; manualInput.focus(); }
 }
 
 function renderTable() {
   totalCount.textContent = items.length;
-  if (items.length === 0) {
-    emptyMsg.style.display = 'block';
-    itemTable.style.display = 'none';
-    return;
-  }
+  if (!items.length) { emptyMsg.style.display='block'; itemTable.style.display='none'; return; }
   emptyMsg.style.display = 'none';
   itemTable.style.display = 'table';
-  tableBody.innerHTML = items.map((item, i) => `
+  tableBody.innerHTML = items.map((item,i) => `
     <tr>
       <td style="color:var(--muted);font-family:var(--mono);font-size:0.72rem;">${i+1}</td>
       <td class="bc">${item.barcode}</td>
@@ -309,113 +277,131 @@ function renderTable() {
     </tr>`).join('');
   document.querySelectorAll('.del-btn').forEach(b => b.onclick = () => { items.splice(+b.dataset.idx,1); renderTable(); });
   document.querySelectorAll('.qtyEdit').forEach(inp => {
-    inp.oninput = () => { const v = parseInt(inp.value); if (!isNaN(v) && v>=1) items[+inp.dataset.idx].qty = v; };
+    inp.oninput = () => { const v=parseInt(inp.value); if(!isNaN(v)&&v>=1) items[+inp.dataset.idx].qty=v; };
   });
 }
 
 addBtn.onclick = () => addItem(manualInput.value, qtyInput.value, false);
-manualInput.onkeydown = e => { if (e.key==='Enter') addItem(manualInput.value, qtyInput.value, false); };
-qtyInput.onkeydown   = e => { if (e.key==='Enter') addItem(manualInput.value, qtyInput.value, false); };
+manualInput.onkeydown = e => { if(e.key==='Enter') addItem(manualInput.value, qtyInput.value, false); };
+qtyInput.onkeydown   = e => { if(e.key==='Enter') addItem(manualInput.value, qtyInput.value, false); };
 
 clearBtn.onclick = () => {
-  if (!items.length) return;
-  if (confirm('Listeyi tamamen temizlemek istiyor musunuz?')) { items=[]; renderTable(); setStatus('Liste temizlendi.'); }
+  if(!items.length) return;
+  if(confirm('Listeyi tamamen temizlemek istiyor musunuz?')) { items=[]; renderTable(); setStatus('Liste temizlendi.'); }
 };
 
-scanBtn.onclick = () => {
+// --- KAMERA: canvas tabanlı döngü ile ZXing ---
+scanBtn.onclick = async () => {
   if (scanning) return;
+
+  try {
+    videoStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } }
+    });
+  } catch(e) {
+    setStatus('Kamera izni alınamadı: ' + e.message, 'var(--danger)');
+    return;
+  }
+
   scanning = true;
-  resultBuffer = {};
+  camVideo.srcObject = videoStream;
+  await camVideo.play();
   cameraWrapper.style.display = 'block';
+  scanInfo.style.display = 'block';
   scanBtn.style.display = 'none';
-  setStatus('Kamera başlatılıyor...', 'var(--accent)');
+  setStatus('Barkodu çerçeve içine getirin...', 'var(--accent)');
 
-  Quagga.init({
-    inputStream: {
-      name: "Live",
-      type: "LiveStream",
-      target: document.getElementById('interactive'),
-      constraints: {
-        facingMode: "environment",
-        width: { ideal: 1280 },
-        height: { ideal: 720 }
-      },
-      area: { top: "20%", right: "5%", left: "5%", bottom: "20%" }
-    },
-    decoder: {
-      readers: [
-        "ean_reader", "ean_8_reader",
-        "code_128_reader", "code_39_reader",
-        "upc_reader", "upc_e_reader",
-        "i2of5_reader", "codabar_reader"
-      ],
-      multiple: false
-    },
-    locate: true,
-    numOfWorkers: 2,
-    frequency: 15
-  }, err => {
-    if (err) {
-      stopScanner();
-      setStatus('Kamera başlatılamadı: ' + err, 'var(--danger)');
-      return;
-    }
-    Quagga.start();
-    setStatus('Barkodu çerçeve içine getirin...', 'var(--accent)');
-  });
+  // ZXing MultiFormatReader — tüm barkod tiplerini okur
+  const hints = new Map();
+  const formats = [
+    ZXing.BarcodeFormat.EAN_13,
+    ZXing.BarcodeFormat.EAN_8,
+    ZXing.BarcodeFormat.CODE_128,
+    ZXing.BarcodeFormat.CODE_39,
+    ZXing.BarcodeFormat.UPC_A,
+    ZXing.BarcodeFormat.UPC_E,
+    ZXing.BarcodeFormat.ITF,
+    ZXing.BarcodeFormat.CODABAR,
+    ZXing.BarcodeFormat.DATA_MATRIX,
+    ZXing.BarcodeFormat.QR_CODE,
+  ];
+  hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, formats);
+  hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
+  codeReader = new ZXing.MultiFormatReader();
+  codeReader.setHints(hints);
 
-  Quagga.onDetected(data => {
-    const code = data.codeResult.code;
-    const errs = data.codeResult.decodedCodes
-      .filter(x => x.error !== undefined)
-      .map(x => x.error);
-    const avgErr = errs.length ? errs.reduce((a,b)=>a+b,0)/errs.length : 1;
-    if (avgErr > 0.2) return;
-
-    resultBuffer[code] = (resultBuffer[code] || 0) + 1;
-    if (resultBuffer[code] < 3) return;
-
-    const now = Date.now();
-    if (code === lastCode && now - lastTime < 3000) return;
-    lastCode = code;
-    lastTime = now;
-    resultBuffer = {};
-
-    if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
-    flash();
-    stopScanner();
-
-    manualInput.value = code;
-    qtyInput.value = '1';
-    setTimeout(() => { qtyInput.focus(); qtyInput.select(); }, 200);
-    setStatus('✓ Barkod okundu: ' + code, 'var(--accent)');
-  });
+  scanLoop();
 };
+
+function scanLoop() {
+  if (!scanning) return;
+
+  const vw = camVideo.videoWidth;
+  const vh = camVideo.videoHeight;
+
+  if (!vw || !vh) {
+    requestAnimationFrame(scanLoop);
+    return;
+  }
+
+  camCanvas.width  = vw;
+  camCanvas.height = vh;
+  const ctx = camCanvas.getContext('2d');
+  ctx.drawImage(camVideo, 0, 0, vw, vh);
+
+  try {
+    const imageData = ctx.getImageData(0, 0, vw, vh);
+    const luminance = new ZXing.RGBLuminanceSource(imageData.data, vw, vh);
+    const binary    = new ZXing.HybridBinarizer(luminance);
+    const bitmap    = new ZXing.BinaryBitmap(binary);
+    const result    = codeReader.decode(bitmap);
+
+    if (result) {
+      const code = result.getText();
+      const now = Date.now();
+      if (code !== lastCode || now - lastTime > 3000) {
+        lastCode = code;
+        lastTime = now;
+        if (navigator.vibrate) navigator.vibrate([80,40,80]);
+        flash();
+        stopScanner();
+        manualInput.value = code;
+        qtyInput.value = '1';
+        setTimeout(() => { qtyInput.focus(); qtyInput.select(); }, 150);
+        setStatus('✓ Barkod okundu: ' + code, 'var(--accent)');
+        return;
+      }
+    }
+  } catch(e) {
+    // NotFoundException normal — barkod henüz görünmüyor
+  }
+
+  requestAnimationFrame(scanLoop);
+}
 
 stopScanBtn.onclick = stopScanner;
 
 function stopScanner() {
   scanning = false;
   cameraWrapper.style.display = 'none';
+  scanInfo.style.display = 'none';
   scanBtn.style.display = 'block';
-  try { Quagga.stop(); } catch(e) {}
+  if (videoStream) { videoStream.getTracks().forEach(t => t.stop()); videoStream = null; }
+  camVideo.srcObject = null;
 }
 
 exportBtn.onclick = () => {
   if (!items.length) { setStatus('Liste boş. Önce barkod ekleyin.', 'var(--danger)'); return; }
   const content = items.map(i => i.barcode + ';' + i.qty).join('\n');
   const blob = new Blob([content], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  const now = new Date();
-  const pad = n => String(n).padStart(2,'0');
-  const ts = now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'_'+pad(now.getHours())+pad(now.getMinutes());
-  a.href = url;
-  a.download = 'liste_' + ts + '.sym';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const now  = new Date();
+  const pad  = n => String(n).padStart(2,'0');
+  const ts   = now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'_'+pad(now.getHours())+pad(now.getMinutes());
+  a.href = url; a.download = 'liste_' + ts + '.sym';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
   setStatus('✓ İndirildi: liste_' + ts + '.sym');
 };
 </script>
